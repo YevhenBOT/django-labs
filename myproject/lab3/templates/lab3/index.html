@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Мої ігри</title>
+</head>
+<body>
+    <h1>Мої улюблені ігри</h1>
+    <p>Виберіть гру, щоб дізнатися більше:</p>
+    <ul>
+        {% for game in games %}
+            <li><a href="{% url 'sub_page' game %}">{{ game }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
