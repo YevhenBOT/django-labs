@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Catalog</title>
+    <style>
+        /* Базовий дизайн, щоб лаба виглядала солідно */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; display: flex; flex-direction: column; min-height: 100vh; background-color: #f4f4f4; }
+        header { background: #2c3e50; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        nav a { color: white; margin-left: 20px; text-decoration: none; font-weight: bold; }
+        nav a:hover { color: #3498db; }
+        main { flex: 1; padding: 40px; max-width: 900px; margin: 0 auto; background: white; width: 100%; box-sizing: border-box; }
+        footer { background: #222; color: #999; padding: 30px; text-align: center; margin-top: auto; }
+        .footer-links { margin-bottom: 10px; }
+        .footer-links a { color: #777; text-decoration: none; margin: 0 10px; }
+        .btn-back { display: inline-block; margin-top: 20px; padding: 10px 15px; background: #3498db; color: white; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">🎮 GameWorld</div>
+        <nav>
+            <a href="/lab3/">Головна</a>
+            {% for genre in genres %}
+                <a href="#">{{ genre.name }}</a>
+            {% endfor %}
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#">Про нас</a>
+            <a href="#">Підтримка</a>
+            <a href="#">Політика конфіденційності</a>
+        </div>
+        <p>&copy; 2026 Лабораторна робота №5. Студентський проект на Django.</p>
+        <p>Натхненно геймерськими порталами.</p>
+    </footer>
+
+</body>
+</html>

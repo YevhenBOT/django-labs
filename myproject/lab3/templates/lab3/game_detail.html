@@ -1,0 +1,12 @@
+{% extends 'lab3/base.html' %}
+
+{% block content %}
+    <article>
+        <h1>{{ game.title }}</h1>
+        <p><b>Жанр:</b> {{ game.genre.name }}</p>
+        <p>{{ game.description }}</p>
+        <p><i>Додано: {{ game.created_at|date:"d.m.Y" }}</i></p>
+        <br>
+        <a href="/">← Повернутися на головну</a>
+    </article>
+{% endblock %}

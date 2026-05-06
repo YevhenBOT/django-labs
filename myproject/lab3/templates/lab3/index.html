@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Мої ігри</title>
-</head>
-<body>
-    <h1>Мої улюблені ігри</h1>
+{% extends 'lab3/base.html' %}
+
+{% block content %}
+    <h1>Каталог ігор</h1>
     <p>Виберіть гру, щоб дізнатися більше:</p>
     <ul>
         {% for game in games %}
-            <li><a href="{% url 'sub_page' game %}">{{ game }}</a></li>
+            <li>
+                <a href="{% url 'game_detail' game.pk %}">{{ game.title }}</a> 
+                — <small>{{ game.genre.name }}</small>
+            </li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}

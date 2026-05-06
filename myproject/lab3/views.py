@@ -1,18 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from .models import Game, Genre
 
+def index(request):
+    # Отримуємо всі ігри та всі жанри з бази даних
+    games = Game.objects.all()
+    genres = Genre.objects.all()
+    return render(request, 'lab3/index.html', {'games': games, 'genres': genres})
 
-def main_page(request):
-    # Список твоїх улюблених ігор
-    games = ['The Witcher 3', 'Minecraft', 'Cyberpunk 2077', 'GTA V']
-    return render(request, 'lab3/index.html', {'games': games})
-
-
-def sub_page(request, page_name):
-    context = {
-        'game_title': page_name,
-        'description': f"Опис гри {page_name}: Це одна з моїх найулюбленіших ігор!"
-    }
-    return render(request, 'lab3/page.html', context)
-
-
-
+def game_detail(request, pk):
+    # Отримуємо конкретну гру за її ID (pk)
+    game = get_object_or_404(Game, pk=pk)
+    genres = Genre.objects.all() # для меню
+    return render(request, 'lab3/game_detail.html', {'game': game, 'genres': genres})
