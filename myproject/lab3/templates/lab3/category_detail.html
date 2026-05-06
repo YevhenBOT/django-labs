@@ -1,0 +1,16 @@
+{% extends 'lab3/base.html' %}
+{% block content %}
+    <h1>Жанр: {{ category.name }}</h1>
+    <hr>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+        {% for game in games %}
+            <div style="border: 1px solid #eee; padding: 15px; border-radius: 8px; background: #fdfdfd;">
+                <h3>{{ game.title }}</h3>
+                <a href="{% url 'game_detail' game.pk %}" style="color: #3498db; text-decoration: none; font-weight: bold;">Переглянути гру →</a>
+            </div>
+        {% empty %}
+            <p>У цьому жанрі ігор поки не знайдено.</p>
+        {% endfor %}
+    </div>
+    <a href="{% url 'index' %}" style="display: inline-block; margin-top: 20px; color: #3498db; text-decoration: none;">← На головну</a>
+{% endblock %}

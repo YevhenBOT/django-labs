@@ -1,12 +1,21 @@
 {% extends 'lab3/base.html' %}
-
 {% block content %}
-    <article>
-        <h1>{{ game.title }}</h1>
-        <p><b>Жанр:</b> {{ game.genre.name }}</p>
-        <p>{{ game.description }}</p>
-        <p><i>Додано: {{ game.created_at|date:"d.m.Y" }}</i></p>
-        <br>
-        <a href="/">← Повернутися на головну</a>
-    </article>
+    <div style="display: flex; gap: 40px; flex-wrap: wrap;">
+        <div style="flex: 1;">
+            {% if game.image_url %}
+                <img src="{{ game.image_url }}" alt="{{ game.title }}" style="width: 100%; border-radius: 10px;">
+            {% else %}
+                <div style="width: 100%; height: 300px; background: #ddd; display: flex; align-items: center; justify-content: center;">Немає фото</div>
+            {% endif %}
+        </div>
+        <div style="flex: 1;">
+            <h1>{{ game.title }}</h1>
+            <p style="font-size: 18px; color: #555;">{{ game.description }}</p>
+            <p><strong>Жанр:</strong> {{ game.genre.name }}</p>
+            <h2 style="color: #2c3e50;">Ціна: 599 грн</h2>
+            <button class="btn-buy">🛒 КУПИТИ ТОВАР</button>
+            <br><br>
+            <a href="{% url 'index' %}" style="color: #3498db; text-decoration: none;">← Назад до списку</a>
+        </div>
+    </div>
 {% endblock %}
