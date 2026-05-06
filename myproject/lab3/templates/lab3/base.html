@@ -6,11 +6,11 @@
     <style>
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f7f6; display: flex; flex-direction: column; min-height: 100vh; }
         header { background: #1a1a1a; color: white; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; }
-        nav a { color: #bbb; text-decoration: none; margin-left: 20px; font-weight: 500; }
+        nav a { color: #bbb; text-decoration: none; margin-left: 20px; font-weight: 500; transition: 0.3s; }
         nav a:hover { color: #fff; }
         main { flex: 1; padding: 30px; max-width: 1100px; margin: 0 auto; width: 100%; box-sizing: border-box; background: white; }
-        footer { background: #111; color: #777; text-align: center; padding: 20px; }
-        .btn-buy { background: #2ecc71; color: white; border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        footer { background: #111; color: #777; text-align: center; padding: 20px; margin-top: 20px; }
+        .btn-buy { background: #2ecc71; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -18,12 +18,22 @@
         <div style="font-size: 26px; font-weight: bold; color: #2ecc71;">🎮 GameWorld</div>
         <nav>
             <a href="{% url 'index' %}">Головна</a>
-            {% for genre in genres %}
-                <a href="{% url 'category_detail' genre.pk %}">{{ genre.name }}</a>
-            {% endfor %}
+
+            {% if user.is_authenticated %}
+                <a href="{% url 'profile' %}" style="color: #2ecc71;">👤 Кабінет ({{ user.username }})</a>
+                <a href="{% url 'logout' %}">Вийти</a>
+            {% else %}
+                <a href="{% url 'login' %}">Увійти</a>
+                <a href="{% url 'register' %}">Реєстрація</a>
+            {% endif %}
         </nav>
     </header>
-    <main>{% block content %}{% endblock %}</main>
-    <footer>&copy; 2026 GameWorld. Лабораторна №6.</footer>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>&copy; 2026 GameWorld Store. Лабораторна робота №8.</footer>
 </body>
 </html>

@@ -1,0 +1,10 @@
+{% extends 'lab3/base.html' %}
+{% block content %}
+<h2>Особистий кабінет: {{ user.username }} {% if user.is_superuser %}(Адмін){% endif %}</h2>
+<h3>{% if user.is_superuser %}Всі замовлення в системі:{% else %}Ваші замовлення:{% endif %}</h3>
+<ul>
+    {% for order in orders %}
+    <li><strong>{{ order.user.username }}</strong> замовив <b>{{ order.game.title }}</b> ({{ order.ordered_at|date:"d.m.Y" }})</li>
+    {% empty %}<li>Замовлень немає.</li>{% endfor %}
+</ul>
+{% endblock %}
