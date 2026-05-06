@@ -1,20 +1,19 @@
 from django.contrib import admin
-from .models import Genre, Game, Platform
+from .models import Genre, Game, Review, Subscriber
 
+@admin.register(Genre)
+class GenreAdmin(admin.ModelAdmin):
+    list_display = ('name',)
 
 @admin.register(Game)
 class GameAdmin(admin.ModelAdmin):
-    # Відображаємо назву, жанр та дати (вимога лаби)
-    list_display = ('title', 'genre', 'created_at', 'updated_at')
-    # Додаємо фільтр справа, щоб було зручніше
-    list_filter = ('created_at', 'genre')
-    # Пошук за назвою гри
-    search_fields = ('title',)
+    list_display = ('title', 'genre', 'created_at')
+    list_filter = ('genre',)
 
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('game', 'user_name', 'score', 'created_at')
 
-# Реєструємо інші таблиці просто
-admin.site.register(Genre)
-admin.site.register(Platform)
-from django.contrib import admin
-
-# Register your models here.
+@admin.register(Subscriber)
+class SubscriberAdmin(admin.ModelAdmin):
+    list_display = ('email', 'date_joined')
