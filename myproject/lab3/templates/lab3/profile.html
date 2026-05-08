@@ -1,10 +1,26 @@
 {% extends 'lab3/base.html' %}
 {% block content %}
-<h2>Особистий кабінет: {{ user.username }} {% if user.is_superuser %}(Адмін){% endif %}</h2>
-<h3>{% if user.is_superuser %}Всі замовлення в системі:{% else %}Ваші замовлення:{% endif %}</h3>
-<ul>
-    {% for order in orders %}
-    <li><strong>{{ order.user.username }}</strong> замовив <b>{{ order.game.title }}</b> ({{ order.ordered_at|date:"d.m.Y" }})</li>
-    {% empty %}<li>Замовлень немає.</li>{% endfor %}
-</ul>
+<h2>Особистий кабінет: {{ user.username }}</h2>
+
+<div style="display: flex; gap: 40px; margin-top: 20px;">
+    <div style="flex: 2;">
+        <h3>Ваші покупки:</h3>
+        {% for order in orders %}
+            <div style="background: white; padding: 15px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                <strong>{{ order.game.title }}</strong>
+                <br><small style="color: #888;">Замовлено: {{ order.ordered_at|date:"d.m.Y H:i" }}</small>
+            </div>
+        {% empty %}
+            <p>У вас ще немає покупок.</p>
+        {% endfor %}
+    </div>
+
+    <div style="flex: 1; background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 5px solid #2ecc71;">
+        <h4>🆘 Потрібна допомога?</h4>
+        <p>Зв'яжіться з нами для отримання ігор:</p>
+        <p><b>Telegram:</b> @zxxsqqh</p>
+        <p><b>Discord:</b> aimbot.exq</p>
+        <p><b>Email:</b> evgenkulis584@gmail.com</p>
+    </div>
+</div>
 {% endblock %}

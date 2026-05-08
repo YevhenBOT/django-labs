@@ -2,38 +2,52 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>GameWorld Store</title>
+    <title>Game World - Мій проект</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f7f6; display: flex; flex-direction: column; min-height: 100vh; }
-        header { background: #1a1a1a; color: white; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; }
-        nav a { color: #bbb; text-decoration: none; margin-left: 20px; font-weight: 500; transition: 0.3s; }
-        nav a:hover { color: #fff; }
-        main { flex: 1; padding: 30px; max-width: 1100px; margin: 0 auto; width: 100%; box-sizing: border-box; background: white; }
-        footer { background: #111; color: #777; text-align: center; padding: 20px; margin-top: 20px; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; flex-direction: column; min-height: 100vh; background-color: #f4f7f6; }
+        header { background: #2c3e50; color: white; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; }
+        nav a { color: white; margin-left: 20px; text-decoration: none; font-weight: bold; }
+        .container { flex: 1; padding: 30px 50px; }
+        /* Стиль футера */
+        footer { background: #2c3e50; color: #bdc3c7; padding: 25px 50px; text-align: center; border-top: 4px solid #2ecc71; }
+        footer a { color: #2ecc71; text-decoration: none; }
         .btn-buy { background: #2ecc71; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
-    <header>
-        <div style="font-size: 26px; font-weight: bold; color: #2ecc71;">🎮 GameWorld</div>
-        <nav>
-            <a href="{% url 'index' %}">Головна</a>
 
-            {% if user.is_authenticated %}
-                <a href="{% url 'profile' %}" style="color: #2ecc71;">👤 Кабінет ({{ user.username }})</a>
-                <a href="{% url 'logout' %}">Вийти</a>
-            {% else %}
-                <a href="{% url 'login' %}">Увійти</a>
-                <a href="{% url 'register' %}">Реєстрація</a>
-            {% endif %}
-        </nav>
-    </header>
+<header>
+    <div class="logo">
+        <a href="{% url 'index' %}" style="font-size: 1.5rem; color: white; text-decoration: none;">🎮 GameWorld</a>
+    </div>
+    <nav>
+        <a href="{% url 'index' %}">Головна</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'profile' %}">Мій кабінет</a>
+            <a href="{% url 'logout' %}">Вийти ({{ user.username }})</a>
+        {% else %}
+            <a href="{% url 'login' %}">Увійти</a>
+            <a href="{% url 'register' %}">Реєстрація</a>
+        {% endif %}
+    </nav>
+</header>
 
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
+<div class="container">
+    {% block content %}
+    {% endblock %}
+</div>
 
-    <footer>&copy; 2026 GameWorld Store. Лабораторна робота №8.</footer>
+<footer>
+    <div style="margin-bottom: 10px;">
+        <strong>© 2026 GameWorld — Лабораторна робота 8</strong>
+    </div>
+    <div style="font-size: 0.9rem;">
+        Зв'язок з розробником:
+        Telegram: <a href="https://t.me/zxxsqqh">@zxxsqqh</a> |
+        Discord: <b>aimbot.exq</b> |
+        Email: <a href="mailto:evgenkulis584@gmail.com">evgenkulis584@gmail.com</a>
+    </div>
+</footer>
+
 </body>
 </html>

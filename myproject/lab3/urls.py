@@ -10,8 +10,8 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='lab3/login.html'), name='login'),
     path('logout/', views.logout_view, name='logout'),
     path('profile/', views.profile, name='profile'),
+    path('buy/<int:pk>/', views.buy_game, name='buy_game'),
 
-    # Відновлення пароля
     path('password-reset/', auth_views.PasswordResetView.as_view(template_name='lab3/password_reset.html'),
          name='password_reset'),
     path('password-reset/done/',

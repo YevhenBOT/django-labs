@@ -1,36 +1,55 @@
 {% extends 'lab3/base.html' %}
+
 {% block content %}
-    <div style="display: flex; gap: 40px;">
-        <div style="flex: 1;">
-            <img src="{{ game.image_url }}" style="width: 100%; border-radius: 10px;">
-            <h2 style="color: #e67e22;">Середній бал: ⭐ {{ game.average_rating }} / 5</h2>
-        </div>
-        <div style="flex: 1;">
-            <h1>{{ game.title }}</h1>
-            <p>{{ game.description }}</p>
-            <button class="btn-buy">🛒 КУПИТИ ТОВАР</button>
+<div style="display: flex; gap: 30px; margin-bottom: 40px;">
+    {% if game.image_url %}
+        <img src="{{ game.image_url }}" alt="{{ game.title }}" style="width: 350px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+    {% endif %}
+    
+    <div>
+        <h1 style="margin-top: 0;">{{ game.title }}</h1>
+        <p style="font-size: 1.1rem;"><strong>Жанр:</strong> {{ game.genre.name }}</p>
+        <p style="font-size: 1.2rem;"><strong>Середній рейтинг:</strong> <span style="color: #f1c40f;">⭐ {{ game.average_rating }}/5</span></p>
+        
+        <div style="margin-top: 30px;">
+            <a href="{% url 'buy_game' game.pk %}">
+                <button class="btn-buy" style="font-size: 1.3rem; padding: 15px 40px; background-color: #2ecc71; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                    🛒 КУПИТИ ТОВАР
+                </button>
+            </a>
         </div>
     </div>
+</div>
 
-    <hr style="margin: 40px 0;">
+<div style="margin-bottom: 40px;">
+    <h3>Про гру:</h3>
+    <p style="line-height: 1.6; color: #444;">{{ game.description }}</p>
+</div>
 
-    <div style="max-width: 600px;">
-        <h3>Залишити відгук та оцінку</h3>
+<hr>
+
+<div style="display: flex; gap: 50px; margin-top: 30px;">
+    <div style="flex: 1;">
+        <h3>Залишити відгук:</h3>
         <form method="post" style="background: #f9f9f9; padding: 20px; border-radius: 10px;">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn-buy" style="background: #3498db;">Надіслати оцінку</button>
+            <button type="submit" class="btn-buy" style="width: 100%;">Надіслати відгук</button>
         </form>
+    </div>
 
-        <h3 style="margin-top: 30px;">Останні відгуки:</h3>
+    <div style="flex: 1.5;">
+        <h3>Відгуки гравців:</h3>
         {% for review in reviews %}
-            <div style="border-bottom: 1px solid #eee; padding: 10px 0;">
-                <strong>{{ review.user_name }}</strong> (Оцінка: {{ review.score }}/5)
-                <p style="margin: 5px 0; color: #555;">{{ review.comment }}</p>
-                <small style="color: #999;">{{ review.created_at }}</small>
+            <div style="border-bottom: 1px solid #eee; padding: 15px 0;">
+                <strong style="font-size: 1.1rem;">{{ review.user_name }}</strong> 
+                <span style="color: #f1c40f; margin-left: 10px;">Оцінка: {{ review.score }}/5</span>
+                <p style="margin-top: 8px; color: #666;">{{ review.comment }}</p>
+                <small style="color: #aaa;">{{ review.created_at|date:"d.m.Y H:i" }}</small>
             </div>
         {% empty %}
-            <p>Ще немає жодного відгуку. Будьте першим!</p>
+            <p style="color: #999;">Поки що немає жодного відгуку. Будьте першим!</p>
         {% endfor %}
     </div>
+</div>
 {% endblock %}

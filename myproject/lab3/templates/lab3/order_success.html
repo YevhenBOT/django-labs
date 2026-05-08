@@ -1,0 +1,20 @@
+{% extends 'lab3/base.html' %}
+{% block content %}
+<div style="text-align: center; padding: 50px;">
+    <h1 style="color: #2ecc71;">Дякуємо за замовлення! 🎉</h1>
+    <p style="font-size: 1.2rem;">Ви придбали: <strong>{{ game.title }}</strong></p>
+
+    <div style="background: #f0fdf4; border: 2px dashed #2ecc71; padding: 25px; border-radius: 15px; display: inline-block; margin-top: 20px;">
+        <h3>📞 Як отримати гру?</h3>
+        <p>Для отримання ключа або доступу, напишіть нам:</p>
+        <p><strong>Telegram:</strong> <a href="https://t.me/zxxsqqh">@zxxsqqh</a></p>
+        <p><strong>Discord:</strong> aimbot.exq</p>
+        <p><strong>Email:</strong> evgenkulis584@gmail.com</p>
+        <p><small>Ваш логін для перевірки: <b>{{ user.username }}</b></small></p>
+    </div>
+
+    <div style="margin-top: 30px;">
+        <a href="{% url 'profile' %}" style="background: #2ecc71; color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: bold;">До моїх замовлень</a>
+    </div>
+</div>
+{% endblock %}

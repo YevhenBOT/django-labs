@@ -11,7 +11,7 @@ class Game(models.Model):
     description = models.TextField(verbose_name="Опис гри")
     image_url = models.URLField(max_length=500, blank=True, null=True)
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)  # Додано це поле
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self): return self.title
 
@@ -25,10 +25,6 @@ class Review(models.Model):
     score = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
     comment = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-
-class Subscriber(models.Model):
-    email = models.EmailField(unique=True)
-    date_joined = models.DateTimeField(auto_now_add=True) # Додано це поле
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Користувач")
